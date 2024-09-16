@@ -80,6 +80,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
+source <(fzf --zsh)
 
 # User configuration
 
@@ -112,6 +113,7 @@ source $ZSH/oh-my-zsh.sh
 alias ls="eza --icons=always --group-directories-first"
 alias less="bat"
 alias du="dust"
+alias fvim='vim $(fzf --preview="bat --color=always {}")'
 path+=('~/.local/bin')
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

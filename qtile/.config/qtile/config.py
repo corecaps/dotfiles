@@ -86,6 +86,8 @@ keys = [
     Key([mod], "q", lazy.spawn("i3lock-fancy-dualmonitor"),desc="lock screen"),
     Key([mod, "shift"], "a", lazy.window.kill(), desc="Kill focused Window"),
     Key([mod, "shift"], "c", lazy.spawn("killall picom"), desc="Close Compositor"),
+    Key([mod], "m", 
+        lazy.spawn("/usr/bin/kitty -e neomutt"),desc="Launch neomutt"), 
     Key([mod], "c", 
         lazy.spawn("/usr/bin/picom --config /home/corecaps/.config/picom.conf"), 
         desc="launch Compositor"),
