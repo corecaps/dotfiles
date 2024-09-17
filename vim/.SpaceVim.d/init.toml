@@ -8,14 +8,15 @@
 
 # All SpaceVim option below [option] section
 [options]
+    guifont = "SauceCodePro Nerd Font Mono:h11"
     # set spacevim theme. by default colorscheme layer is not loaded,
     # if you want to use more colorscheme, please load the colorscheme
     # layer
-    colorscheme = "gruvbox"
+    colorscheme = "dracula"
     colorscheme_bg = "dark"
     # Disable guicolors in basic mode, many terminal do not support 24bit
     # true colors
-    enable_guicolors = false
+    enable_guicolors = true
     # Disable statusline separator, if you want to use other value, please
     # install nerd fonts
     statusline_separator = "nil"
@@ -30,6 +31,7 @@
 
 # Enable autocomplete layer
 [[layers]]
+name = "colorscheme"
 name = 'autocomplete'
 auto_completion_return_key_behavior = "complete"
 auto_completion_tab_key_behavior = "cycle"

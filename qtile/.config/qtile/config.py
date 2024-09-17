@@ -1,5 +1,5 @@
 from libqtile import bar, layout, widget
-from libqtile.config import Click, Drag, Group, Key, Match, Screen
+from libqtile.config import Click, Drag, Group, Key, Match, Screen, ScratchPad, DropDown
 from libqtile.lazy import lazy
 from libqtile import hook
 import os
@@ -80,6 +80,7 @@ keys = [
         desc="Toggle between split and unsplit sides of stack"),
 # App & Menu Spawning Keybindings 
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
+    Key([mod], "z", lazy.group['ScratchPad'].dropdown_toggle('term')),
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod], "d", lazy.spawn("rofi -show drun"),desc="Rofi"),
     Key([mod], "p", lazy.spawn("rofi-pass"), desc="Password Manager"),
@@ -145,6 +146,11 @@ for i in range(len(group_names)):
         ]
     )
 
+groups.append(
+        ScratchPad("ScratchPad", [
+            DropDown("term", "kitty", opacity=0.8, height = 0.25, width=0.9,x=0.05)
+            ])
+        )
 layouts = [
         layout.Columns(
             border_focus_stack="#6c8e93",
@@ -744,7 +750,7 @@ def autostart():
             ['/usr/bin/cbatticon'],
             ['/usr/bin/dunst'],
             ['/home/corecaps/scripts/tablette_config.sh'],
-            ['/usr/bin/feh','--bg-scale','/home/corecaps/wallpapers/abstract_grid.jpg','/home/corecaps/wallpapers/abstract_grid.jpg'],
+            ['/usr/bin/feh','--bg-scale','/home/corecaps/wallpapers/a_black_and_white_image_of_a_room.jpeg','/home/corecaps/wallpapers/a_black_and_white_drawing_of_a_large_metal_structure.jpg'],
             ['/usr/bin/picom','-b','--conf','/home/corecaps/.config/picom/picom.conf']
             ]
     for p in processes:
