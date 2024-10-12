@@ -6,9 +6,10 @@
 #\ \_\ \_\ \____\ \____/\ \_\ \_\ \_\ \____/ \ \__\\ \__\
 # \/_/\/_/\/____/\/___/  \/_/\/_/\/_/\/___/   \/__/ \/__/
 #
+# GMAIL 
 # Notmutch Lieer config as seen in https://www.jevy.org/articles/neomutt-lieer-notmuch/
 set folder=~/mail
-set nm_db_limit = 5000
+set nm_db_limit = 1000
 set nm_default_url = "notmuch:///home/corecaps/mail"
 set mbox_type = Maildir
 set spoolfile = "Inbox"
@@ -20,11 +21,31 @@ virtual-mailboxes "Flagged" "notmuch://?query=tag:flagged"
 virtual-mailboxes "Promotions" "notmuch://?query=tag:promotions"
 virtual-mailboxes "Social" "notmuch://?query=tag:social"
 virtual-mailboxes "Sent" "notmuch://?query=tag:sent"
+virtual-mailboxes "Unread" "notmuch://?query=tag:unread"
+
 set sendmail = "gmi send -t -C /home/corecaps/mail"
 macro index o "<shell-escape>cd ~/mail; gmi sync<enter>" "run lieer to sync corecaps@gmail.com"
 set index_format='%4C %Z %<[y?%<[m?%<[d?%[%l:%M%p ]&%[%a %d ]>&%[%b %d ]>&%[%m/%y ]> %-15.15L %s %g'
 macro index \Cf "<vfolder-from-query>" "show only messages matching a notmuch pattern"
 
+# Nerdistan.dev mail account config :
+
+# Configuration for the new IMAP/SMTP account
+account-hook imaps://mail.privateemail.com 'set imap_user="jgarcia@nerdistan.dev" imap_pass="LvElDrDi@94400"'
+account-hook smtp://mail.privateemail.com 'set smtp_url="smtps://jgarcia@nerdistan.dev@mail.privateemail.com:465/" smtp_pass="LvElDrDi@94400"'
+
+# Set folders for the new account
+folder-hook imaps://mail.privateemail.com 'set folder="imaps://mail.privateemail.com:993" \
+  spoolfile="+INBOX" \
+  record="+Sent" \
+  postponed="+Drafts" \
+  trash="+Trash"'
+
+# Set SSL/TLS settings
+set ssl_force_tls=yes
+set ssl_starttls=yes
+set ssl_verify_dates=yes
+set ssl_verify_host=yes
 # General config inspired by https://gideonwolfe.com/posts/workflow/neomutt/intro/
 set editor = "vim"
 set my_name = "Julien Mazari Garcia"
@@ -174,4 +195,8 @@ bind index <space> collapse-thread
 # Email completion bindings
 bind editor <Tab> complete-query
 bind editor ^T complete
+# Keybinding to switch to the Gmail virtual Inbox
+macro index <F1> '<change-folder>notmuch://?query=(tag:inbox -tag:promotions -tag:social) OR (tag:inbox and tag:flagged)<enter>' "Switch to Gmail Inbox"
 
+# Keybinding to switch to the new IMAP account
+macro index <F2> "<change-folder>imaps://mail.privateemail.com/INBOX<enter>" "Switch to New Email Account Inbox"

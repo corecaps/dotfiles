@@ -114,6 +114,10 @@ alias ls="eza --icons=always --group-directories-first"
 alias less="bat"
 alias du="dust"
 alias fvim='vim $(fzf --preview="bat --color=always {}")'
+alias 6err='journalctl -b -p err'
+alias kal='khal calendar'
+alias myip='curl -s http://checkip.amazonaws.com'
 path+=('~/.local/bin')
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

@@ -90,8 +90,8 @@ keys = [
     Key([mod], "m", 
         lazy.spawn("/usr/bin/kitty -e neomutt"),desc="Launch neomutt"), 
     Key([mod], "c", 
-        lazy.spawn("/usr/bin/picom --config /home/corecaps/.config/picom.conf"), 
-        desc="launch Compositor"),
+        lazy.spawn("/home/corecaps/scripts/rofi_comics.sh"), 
+        desc="read comics"),
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
 ]
@@ -667,7 +667,7 @@ screens = [
                     foreground="#122127",
 
                 ),
-                 widget.Pomodoro(
+                 widget.Mpd2(
                     background="#952d29",
                     color_inactive="#6c8e93",
                     padding=4
